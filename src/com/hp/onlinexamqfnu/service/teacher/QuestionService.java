@@ -86,8 +86,13 @@ public class QuestionService implements IQuestionService {
 
 	@Override
 	public List<Question> findQuestionByIds(String ids) {
-		// TODO Auto-generated method stub
-				return null;
+		
+		if (null == ids)
+				return new ArrayList<Question>();
+			else
+				return qd.findQuestionByIds(ids);
+		
+
 	}
 
 }

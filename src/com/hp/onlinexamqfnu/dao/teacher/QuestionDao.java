@@ -58,8 +58,19 @@ DBUtil db=new DBUtil();
 
 	@Override
 	public List<Question> findQuestionByIds(String ids) {
-	
-		return null;
+				
+			String sql = "select * from questions where FIND_IN_SET (id,?)";
+			List questionList = new ArrayList();
+			try {
+				questionList = db.getQueryList(Question.class, sql, new Object[] {ids});
+			} catch (Exception e) {
+			
+				e.printStackTrace();
+			}
+			if (null == questionList)
+				questionList = new ArrayList();
+			return questionList;
+
 	}
 
 	@Override

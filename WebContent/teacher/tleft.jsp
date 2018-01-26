@@ -39,7 +39,7 @@ history.go(1);//屏蔽回退
         <li><a href='<%=path%>/PapersCompareServlet' target="mainFrame">班级评估</a></li>
         <li><a href='<%=path%>/TestAddServlet' target="mainFrame">发布试卷</a></li>
         <li><a href="<%=path%>/QuestionQueryServlet" target="mainFrame">题库管理</a></li>
-        <li><a href="<%=path %>/LogoutServlet" target="_parent" onclick="javascript: return confirm('确认退出用户吗？');">退出用户</a></li>
+        <li><a href="<%=path %>/LogOutServlet" target="_parent" onclick="javascript: return confirm('确认退出用户吗？');">退出用户</a></li>
     </ul>
     </td>
     </tr>

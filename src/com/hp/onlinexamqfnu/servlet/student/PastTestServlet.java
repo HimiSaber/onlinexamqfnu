@@ -1,4 +1,4 @@
-package com.hp.onlinexamqfnu.servlet.teacher;
+package com.hp.onlinexamqfnu.servlet.student;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,25 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.hp.onlinexamqfnu.po.Test;
-import com.hp.onlinexamqfnu.service.admin.IStuClassService;
-import com.hp.onlinexamqfnu.service.admin.StuClassService;
-import com.hp.onlinexamqfnu.service.teacher.ITestService;
-import com.hp.onlinexamqfnu.service.teacher.TestService;
+import com.hp.onlinexamqfnu.po.Paper;
+import com.hp.onlinexamqfnu.po.Student;
+import com.hp.onlinexamqfnu.service.teacher.IPaperService;
+import com.hp.onlinexamqfnu.service.teacher.PaperService;
 
 /**
- * Servlet implementation class TestQueryService
+ * Servlet implementation class PastTestServlet
  */
-@WebServlet("/TestQueryServlet")
-public class TestQueryServlet extends HttpServlet {
+@WebServlet("/pastTestServlet")
+public class PastTestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       private ITestService ts=new TestService();
-       private IStuClassService scs=new StuClassService();
-       
+       IPaperService ps=new PaperService();
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TestQueryServlet() {
+    public PastTestServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,17 +34,11 @@ public class TestQueryServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-        HttpSession session = request.getSession();
-		int teacherId=(int) session.getAttribute("teacher.id");
-	
-		
-	
-		List testList=ts.findTestsByTeaId(teacherId);
-		
-		
-		request.setAttribute("testsList", testList);
-		request.getRequestDispatcher("/teacher/tmain.jsp").forward(request, response);
+		HttpSession session=request.getSession();
+		Student s=(Student) session.getAttribute("student");
+		List<Paper> paperList=ps.getPaperByStudentId(s.getId());
+		request.setAttribute("paperList", paperList);
+		request.getRequestDispatcher("student/history.jsp").forward(request, response);
 	}
 
 	/**
